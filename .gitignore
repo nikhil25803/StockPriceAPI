@@ -6,6 +6,9 @@ __pycache__/
 # C extensions
 *.so
 
+# Project files to ignore
+*.CSV
+
 # Distribution / packaging
 .Python
 build/
