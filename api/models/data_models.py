@@ -3,7 +3,7 @@ from typing import List
 
 
 class Stock(BaseModel):
-    """Model for Stocks response"""
+    """Stock Data Model"""
 
     SC_CODE: float
     SC_NAME: str
@@ -22,7 +22,7 @@ class Stock(BaseModel):
 
 
 class StockHistory(BaseModel):
-    """Model for stock history"""
+    """Stock History Data Model"""
 
     OPEN: float
     HIGH: float
@@ -32,20 +32,20 @@ class StockHistory(BaseModel):
 
 
 class FavouriteStock(BaseModel):
-    """Model for favourite stock data"""
+    """Favourite Stock Data Model"""
 
     SC_CODE: str
 
 
 class TopStocksResponse(BaseModel):
-    """Model for list of Stocks"""
+    """Top Stock Data Response"""
 
     data: List[Stock]
     message: str
 
 
 class StockDataResponse(BaseModel):
-    """Model for single stock response"""
+    """Stock Data Response"""
 
     data: List[Stock] | None = None
     message: str
@@ -53,7 +53,7 @@ class StockDataResponse(BaseModel):
 
 
 class StockHistoryResponse(BaseModel):
-    """Model list of stock hostiry"""
+    """Stock Data History Response"""
 
     data: List[StockHistory] | None = None
     message: str
@@ -61,7 +61,7 @@ class StockHistoryResponse(BaseModel):
 
 
 class FavouriteStockResponse(BaseModel):
-    """Response model to fetch list of favourit stocks"""
+    """Favourite Stock Data Reponse"""
 
     data: List[FavouriteStock] | None = None
     message: str

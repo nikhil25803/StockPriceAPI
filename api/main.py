@@ -3,6 +3,7 @@ from fastapi import FastAPI, status
 from fastapi.responses import JSONResponse
 from .db import db_config
 from .routes import api_routes
+from fastapi.middleware.cors import CORSMiddleware
 
 # Connect DB
 db_config.connect_db()
@@ -20,6 +21,15 @@ app = FastAPI(
         "name": " MIT license",
         "url": "https://github.com/nikhil25803/StockPriceAPI/blob/main/LICENSE",
     },
+)
+
+# Middlewares
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 
