@@ -45,6 +45,9 @@ def load_data_to_database(filename: str, file_date: str) -> bool:
     # Add a new columns - date
     data["date"] = file_date
 
+    # Strip the whitespace around name
+    data["SC_NAME"] = data["SC_NAME"].str.strip()
+
     # Convert each data into a dict and store them in a list
     data_list = [data.iloc[i, :].to_dict() for i in range(len(data))]
 
