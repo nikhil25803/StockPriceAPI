@@ -13,7 +13,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 
-def load_data_to_database(filename: str) -> bool:
+def load_data_to_database(filename: str, file_date: str) -> bool:
     """Function load CSVC"""
 
     # Get the Mongo DB URL from .env file
@@ -41,6 +41,9 @@ def load_data_to_database(filename: str) -> bool:
 
     # Read the CSV File
     data = pandas.read_csv(file_path)
+
+    # Add a new columns - date
+    data["date"] = file_date
 
     # Convert each data into a dict and store them in a list
     data_list = [data.iloc[i, :].to_dict() for i in range(len(data))]
@@ -87,7 +90,9 @@ def download_csv_data(date: str) -> bool:
             zip_file.extractall(target_directory)
 
         # Try to load the data into the database
-        db_response = load_data_to_database(filename=file_name_from_date)
+        db_response = load_data_to_database(
+            filename=file_name_from_date, file_date=f"{day}/{month}/{year}"
+        )
 
         if db_response == False:
             return False
