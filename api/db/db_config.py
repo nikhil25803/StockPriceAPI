@@ -5,7 +5,7 @@ from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
 from fastapi import HTTPException, status
 
-# Take environment variables from .env.
+# Load env variables
 load_dotenv()
 
 # Get the Mongo DB URL from .env file
@@ -15,8 +15,8 @@ MONGO_URI = os.environ.get("MONGO_URI")
 client = MongoClient(MONGO_URI, server_api=ServerApi("1"))
 
 
+# Test the connection
 def connect_db(DB_URI: str = MONGO_URI):
-    # Test the connection
     try:
         client.admin.command("ping")
     except Exception as e:

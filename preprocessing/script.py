@@ -8,14 +8,15 @@ from zipfile import ZipFile
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
 from dotenv import load_dotenv
+from datetime import datetime, timedelta
 
 # Take environment variables from .env.
 load_dotenv()
 
+"""Function to load CSV data and add into the database"""
+
 
 def load_data_to_database(filename: str, file_date: str) -> bool:
-    """Function load CSVC"""
-
     # Get the Mongo DB URL from .env file
     MONGO_URI = os.environ.get("MONGO_URI")
 
@@ -60,9 +61,10 @@ def load_data_to_database(filename: str, file_date: str) -> bool:
     return True
 
 
-def download_csv_data(date: str) -> bool:
-    """Function to download CSV data"""
+"""Function to download CSV data"""
 
+
+def download_csv_data(date: str) -> bool:
     # Formatting file name from date
     day = date.split("/")[0]
     month = date.split("/")[1]
@@ -104,6 +106,7 @@ def download_csv_data(date: str) -> bool:
         print("Unable to process.\nError: ", e)
         return False
 
+    print(f"Successfully fetched and added stock data of date: {day}/{month}/{year}")
     return True
 
 
@@ -128,7 +131,19 @@ if __name__ == "__main__":
 
     # If last 50 days data is requested
     if args.last50Days == True:
-        pass
+        # Get today's date
+        today = datetime.now()
+
+        # Calculate the date for each of the last 50 days
+        last_50_days = [today - timedelta(days=i) for i in range(50)]
+
+        # Loop on all date, extract the csv file and load the data into database
+        for _date in last_50_days:
+            try:
+                download_csv_data(date=_date)
+            except:
+                continue
+
     elif args.date:
         # Entered date
         date_string = args.date

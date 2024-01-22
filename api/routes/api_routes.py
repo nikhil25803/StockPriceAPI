@@ -220,7 +220,7 @@ async def get_all_favourites(cache: dict = Depends(lambda: cache)):
     except Exception as e:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
-            detail="Unable to fetch favourite stocks data",
+            detail=f"Unable to fetch favourite stocks data.\nError: {e}",
         )
 
 
@@ -258,6 +258,6 @@ async def remove_favourite_stock(stock_code: str):
         )
     except Exception as e:
         raise HTTPException(
-            detail="Unable to remove stocks from favourite.",
+            detail=f"Unable to remove stocks from favourite.\nError: {e}",
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
         )

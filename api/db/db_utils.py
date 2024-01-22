@@ -14,7 +14,7 @@ async def db_aggregation(db_name: str, collection_name: str, pipeline):
     return list(results)
 
 
-"""Find one query on database"""
+"""Find-one query on database"""
 
 
 async def db_find_one(db_name: str, collection_name: str, filter: dict):
@@ -28,7 +28,7 @@ async def db_find_one(db_name: str, collection_name: str, filter: dict):
     return result
 
 
-"""Query to insert one data"""
+"""Insert-one query on database"""
 
 
 async def db_insert_one(db_name: str, collection_name: str, data: dict):
@@ -40,7 +40,7 @@ async def db_insert_one(db_name: str, collection_name: str, data: dict):
     collection.insert_one(data)
 
 
-"""Query to fetch all records from a collection"""
+"""Find-all query on database"""
 
 
 async def db_fetch_all(db_name: str, collection_name: str):
@@ -54,7 +54,7 @@ async def db_fetch_all(db_name: str, collection_name: str):
     return result
 
 
-"""Query to delete data from a collection"""
+"""Delete query on database"""
 
 
 async def db_delete(db_name: str, collection_name: str, filter: dict):
