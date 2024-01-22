@@ -31,6 +31,12 @@ class StockHistory(BaseModel):
     date: str
 
 
+class FavouriteStock(BaseModel):
+    """Model for favourite stock data"""
+
+    SC_CODE: str
+
+
 class TopStocksResponse(BaseModel):
     """Model for list of Stocks"""
 
@@ -50,5 +56,13 @@ class StockHistoryResponse(BaseModel):
     """Model list of stock hostiry"""
 
     data: List[StockHistory] | None = None
+    message: str
+    status: int
+
+
+class FavouriteStockResponse(BaseModel):
+    """Response model to fetch list of favourit stocks"""
+
+    data: List[FavouriteStock] | None = None
     message: str
     status: int
